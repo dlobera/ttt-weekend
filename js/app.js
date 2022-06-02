@@ -1,5 +1,5 @@
 /*-------------------------------- Constants --------------------------------*/
-
+const players
 
 
 /*---------------------------- Variables (state) ----------------------------*/
@@ -21,6 +21,12 @@ console.log(messageEl)
 /*-------------------------------- Functions --------------------------------*/
 init()
 function init() {
-console.log('sanity check')
+  board = [null, null, null, null, null, null, null, null, null]
+  turn = 1 // represents player x
+  winner = null // null = no winner, 1 = x won, -1 = o won, t= tie, anything else game over
+  render() 
 }
 
+function render () {
+  
+}
