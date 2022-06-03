@@ -17,14 +17,16 @@ let board, turn, winner
 
 /*------------------------ Cached Element References ------------------------*/
 const squareEls = document.querySelectorAll('.square')
-console.log(squareEls)
+
 
 const messageEl = document.querySelector('h2')
-console.log(messageEl)
+
 
 
 /*----------------------------- Event Listeners -----------------------------*/
-
+squareEls.forEach(function(square) {
+  square.addEventListener('click', handleClick)
+})
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -59,3 +61,9 @@ function renderMessage() {
   }
 }
 
+function handleClick(evt) {
+// console.log(evt)
+// console.log(evt.target)
+console.log(evt.target.id.slice(2))
+const sqIdx = evt.target.id.substring(2)
+} 
