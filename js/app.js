@@ -18,8 +18,9 @@ let board, turn, winner
 /*------------------------ Cached Element References ------------------------*/
 const squareEls = document.querySelectorAll('.square')
 
-
 const messageEl = document.querySelector('h2')
+
+let resetBtnEl = document.querySelector('button')
 
 
 
@@ -28,11 +29,14 @@ squareEls.forEach(function(square) {
   square.addEventListener('click', handleClick)
 })
 
+resetBtnEl.addEventListener('click', function() {
+  init()
+})
 
 /*-------------------------------- Functions --------------------------------*/
 init()
 function init() {
-  board = [1, null, null, null, null, null, null, null, null]
+  board = [null, null, null, null, null, null, null, null, null]
   turn = 1 // represents player x
   winner = null // null = no winner, 1 = x won, -1 = o won, t= tie, anything else game over
   render() 
@@ -46,6 +50,9 @@ function render () {
     } 
     if (square === -1) {
       squareEls[i].textContent = 'O'
+    }
+    if (!square) {
+      squareEls[i].textContent = ''
     }
   })
   renderMessage()
@@ -64,6 +71,29 @@ function renderMessage() {
 function handleClick(evt) {
 // console.log(evt)
 // console.log(evt.target)
-console.log(evt.target.id.slice(2))
-const sqIdx = evt.target.id.substring(2)
+const sqIdx = parseInt(evt.target.id.substring(2))
+
+if (board[sqIdx] !== null || winner !== null) {
+  return
 } 
+
+board[sqIdx] = turn
+turn*=-1
+getWinner()
+render()
+}
+
+function getWinner() {
+  winningCombos.forEach(function(winningCom) {
+    let sum = board[winningCom[0]] + board[winningCom[1]] + board[winningCom[2]] 
+    if(sum === 3) {
+      winner = 'X'
+    }
+    if (sum === -3) {
+      winner = 'O'
+    }
+    else if (board.includes(null) === false)
+    winner = "T"
+  })
+}
+
