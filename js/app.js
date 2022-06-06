@@ -84,23 +84,15 @@ render()
 }
 
 function getWinner() {
-  winningCombos.forEach(function(winningCom) {
-    let sum = board[winningCom[0]] + board[winningCom[1]] + board[winningCom[2]] 
-    if(sum === 3) {
-      winner = 'X'
+    
+  for (let i=0; i < winningCombos.length; i++) {
+      if (board[winningCombos[i][0]] + board[winningCombos[i][1]] + board[winningCombos[i][2]] === 3) {
+          return winner = 'X'
+      } else  if (board[winningCombos[i][0]] + board[winningCombos[i][1]] + board[winningCombos[i][2]] === -3) {
+          return winner = 'O'
+      } else if (board.includes(null) === false) {
+        return winner= 'T'
     }
-    else if (sum === -3) {
-      winner = 'O'
-    }
-    else if (board.every(isTaken) && board.some(isNull) === false) {
-      sum === 3 ? winner = 'X' : winner = 'T'
-    }
-  })
-  function isTaken(element) {
-    if (element.value === 1 || element.value === -1) return true
-  }
-  function isNull(element) {
-    if (element.value === null) return true
-  }
 }
-
+return null
+}
