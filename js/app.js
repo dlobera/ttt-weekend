@@ -89,11 +89,18 @@ function getWinner() {
     if(sum === 3) {
       winner = 'X'
     }
-    if (sum === -3) {
+    else if (sum === -3) {
       winner = 'O'
     }
-    else if (board.includes(null) === false)
-    winner = "T"
+    else if (board.every(isTaken) && board.some(isNull) === false) {
+      sum === 3 ? winner = 'X' : winner = 'T'
+    }
   })
+  function isTaken(element) {
+    if (element.value === 1 || element.value === -1) return true
+  }
+  function isNull(element) {
+    if (element.value === null) return true
+  }
 }
 
